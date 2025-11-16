@@ -12,3 +12,7 @@ In main.py of this repository, utilized chatgpt and asked to create a connector 
 Added some test SQL code like create a table and query.
 
 ----------------------------------------------------------------------------------------------------------------------------------------
+
+Sunday November 16th:
+I really tried executing with XAMPP the past week with PHP, it was not going well. Reverting back to tried and true python working through CLI.
+Goal today is to get login working with bcrypt. Will need to create table, have create.
