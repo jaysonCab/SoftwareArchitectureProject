@@ -16,7 +16,7 @@ class AnimeAPIFacade:
     url = "https://api.jikan.moe/v4/anime"
 
     @staticmethod
-    def search_anime(name):
+    def searchAnime(name):
 
         params = {
             "q": name,

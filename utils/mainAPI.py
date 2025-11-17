@@ -1,4 +1,3 @@
-import requests
 from utils.mainDatabase import addToList
 from utils.animeFacade import AnimeAPIFacade
 
@@ -6,7 +5,7 @@ def malAPICheck(user):
 
     animeInputName = input(str("\nWhat anime do you want to search for: "))
 
-    item = AnimeAPIFacade.search_anime(animeInputName)
+    item = AnimeAPIFacade.searchAnime(animeInputName)
 
     if item is None:
         print("No results found. Try another search.")

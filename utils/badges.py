@@ -1,1 +1,2 @@
-def checkBadgesForUser(user, animeTitle)
+def checkBadgesForUser(user, animeTitle):
+    pass
