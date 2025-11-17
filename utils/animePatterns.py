@@ -37,3 +37,19 @@ class AnimeAPIFacade:
             "aired_from": get_nested(anime, "aired", "from"),
             "aired_to": get_nested(anime, "aired", "to"),
         }
+
+class AnimeAPIProxy:
+    # Holds dictionary of name as key, value as dictionary of important information regarding the key
+    _cache = {}
+
+    @staticmethod
+    def search(name):
+
+        if name in AnimeAPIProxy._cache:
+            return AnimeAPIProxy._cache[name]
+
+        result = AnimeAPIFacade.searchAnime(name)
+
+        AnimeAPIProxy._cache[name] = result
+
+        return result

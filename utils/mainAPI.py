@@ -1,11 +1,12 @@
 from utils.mainDatabase import addToList
-from utils.animeFacade import AnimeAPIFacade
+from utils.animePatterns import AnimeAPIProxy
 
+# Proxy substitutes the process
 def malAPICheck(user):
 
     animeInputName = input(str("\nWhat anime do you want to search for: "))
 
-    item = AnimeAPIFacade.searchAnime(animeInputName)
+    item = AnimeAPIProxy.search(animeInputName)
 
     if item is None:
         print("No results found. Try another search.")
