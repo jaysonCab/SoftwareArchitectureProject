@@ -4,11 +4,11 @@ from utils.mainMenu import mainMenu
 
 def main():
     try:
-        state = loginSystem() # State false means they tried to create an account and it exited the program. They should run the program again in login mode to continue
-        if state == False:
+        user = loginSystem() # State false means they tried to create an account and it exited the program. They should run the program again in login mode to continue
+        if user == False:
             return
 
-        mainMenu()
+        mainMenu(user)
     
     except Exception as e:
         print(f'An error has occured: {e}')

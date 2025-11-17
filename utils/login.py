@@ -1,5 +1,5 @@
 import bcrypt
-from utils.mainDatabase import Database
+from utils.mainDatabase import Database, buildUser
 
 def loginSystem():
     print(f'Would you like to login or create an account? (Login/Create): ')
@@ -48,7 +48,7 @@ def loginAccount():
 
     # Fetch the hashed password for this username
     db.cursor.execute(
-        "SELECT password_hash FROM software_architecture_credentials WHERE username = %s",
+        "SELECT id, username, password_hash  FROM software_architecture_credentials WHERE username = %s",
         (username,)
     )
     result = db.cursor.fetchone()
@@ -57,10 +57,15 @@ def loginAccount():
         print("Account not found.")
         return True
 
-    stored_hash = result[0].encode('utf-8')  # Convert stored string back to bytes
+    stored_hash = result[2].encode('utf-8')  # Convert stored string back to bytes
 
     # Check entered password against stored hash
     if bcrypt.checkpw(password.encode('utf-8'), stored_hash):
         print("Login successful!")
+
+        user = buildUser(result)
+        return user
+    
     else:
         print("Incorrect password.")
+        return False

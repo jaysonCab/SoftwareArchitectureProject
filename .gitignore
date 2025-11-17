@@ -5,5 +5,4 @@ utils/__pycache__/
 utils/__init__.py
 __init__.py
 credentials.py
-sqlManual.py
 test.py
