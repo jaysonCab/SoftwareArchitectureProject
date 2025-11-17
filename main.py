@@ -1,3 +1,15 @@
+'''
+You cannot utilize this locally as you require credentials that I shouldn't share.
+Particularly credentials IP address and Password to access the SQL hosted database.
+
+Supported with Virtual machine though. On windows bash terminal run:
+python -m venv venv
+source venv/Scripts/activate
+pip install -r requirements.txt
+
+Should be good to run.
+'''
+
 from utils.mainDatabase import Database
 from utils.login import loginSystem
 from utils.mainMenu import mainMenu

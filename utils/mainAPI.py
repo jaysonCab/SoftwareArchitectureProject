@@ -15,10 +15,10 @@ def malAPICheck(user):
         print("No results found. Try another search.")
         return True
     
-    print(f'English Title: {item['english_title']}')
-    print(f'Average Score: {item['score']}')
-    print(f'Staring Air Date: {item['aired_from']}')
-    print(f'Ending Air Date: {item['aired_to']}')
+    print(f"English Title: {item['english_title']}")
+    print(f"Average Score: {item['score']}")
+    print(f"Staring Air Date: {item['aired_from']}")
+    print(f"Ending Air Date: {item['aired_to']}")
 
     # Decision tree used to figure out what they would like to do next after searching for a show
     decision = input(str('\nWould you like to search another show or add this one to your list? (Y/N/Add): ')).lower()
