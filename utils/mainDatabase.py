@@ -1,6 +1,7 @@
 import mysql.connector
 from credentials import Password, IP
 from utils.supportingClasses import Show, User
+from utils.badges import checkBadgesForUser
 
 # Replace with your Cloud SQL info
 HOST = IP
@@ -70,6 +71,7 @@ def addToList(animeAPIResponse, user):
     )
 
     user.watched_shows.append(new_show)
+    checkBadgesForUser(user, anime_title)
 
     return
 

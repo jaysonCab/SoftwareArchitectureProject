@@ -1,0 +1,1 @@
+def checkBadgesForUser(user, animeTitle)

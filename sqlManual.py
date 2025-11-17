@@ -67,11 +67,28 @@ try:
     # """)
     # conn.commit()
 
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS software_architecture_user_badges (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
+            badge_number INT NOT NULL,
+
+            FOREIGN KEY (user_id)
+                REFERENCES software_architecture_credentials(id)
+                ON DELETE CASCADE,
+
+            FOREIGN KEY (badge_number)
+                REFERENCES software_architecture_badges(badge_number)
+                ON DELETE CASCADE
+        )
+    """)
+    conn.commit()
+
     # # Insert sample data
     # cursor.execute("INSERT INTO software_architecture_badges (badge_number, badge_name, badge_description) VALUES (%s, %s, %s)",(101, 'One Piece Fanatic', "You've added One Piece to your list!"))
     # conn.commit()
 
-    # cursor.execute("INSERT INTO software_architecture_badges (badge_number, badge_name, badge_description) VALUES (%s, %s, %s)",(101, 'OnePiece Fanatic', "You've added One Piece to your list!"))
+    # cursor.execute("INSERT INTO software_architecture_badges (badge_number, badge_name, badge_description) VALUES (%s, %s, %s)",(102, '10 Plus Watched', "You've added at least 10 anime to your watched list!"))
     # conn.commit()
 
     # # Insert sample data
@@ -83,12 +100,12 @@ try:
     # conn.commit()
 
     # # Retrieve data
-    cursor.execute("SELECT * FROM software_architecture_profile_comments")
-    rows = cursor.fetchall()
-    for row in rows:
-        print(row)
+    # cursor.execute("SELECT * FROM software_architecture_profile_comments")
+    # rows = cursor.fetchall()
+    # for row in rows:
+    #     print(row)
 
-    cursor.execute("SELECT * FROM software_architecture_profile_comments")
+    cursor.execute("SELECT * FROM software_architecture_badges")
     rows = cursor.fetchall()
     for row in rows:
         print(row)

@@ -1,38 +1,17 @@
 import requests
 from utils.mainDatabase import addToList
-
-def get_nested(data, *keys):
-    """
-    Grab nested value
-    """
-
-    for key in keys:
-        if isinstance(data, dict):
-            data = data.get(key)
-        else:
-            return None
-    return data
+from utils.animeFacade import AnimeAPIFacade
 
 def malAPICheck(user):
 
     animeInputName = input(str("\nWhat anime do you want to search for: "))
 
-    url = "https://api.jikan.moe/v4/anime"
-    params = {
-        "q": f"{animeInputName}",
-        "type": "tv"
-    }
-    response = requests.get(url, params = params)
-    data = response.json()['data']
-    anime = data[0]
+    item = AnimeAPIFacade.search_anime(animeInputName)
 
-    item = {
-        "english_title": get_nested(anime, "title_english"),
-        "score": get_nested(anime, "score"),
-        "aired_from": get_nested(anime, "aired", "from"),
-        "aired_to": get_nested(anime, "aired", "to")
-    }
-
+    if item is None:
+        print("No results found. Try another search.")
+        return True
+    
     print(f'English Title: {item['english_title']}')
     print(f'Average Score: {item['score']}')
     print(f'Staring Air Date: {item['aired_from']}')
