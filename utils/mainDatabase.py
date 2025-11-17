@@ -37,6 +37,11 @@ class Database:
         print("Connection closed.")
 
 def addToList(animeAPIResponse, user):
+    '''
+    Main function in charge with adding the show as a watched show to the associating table.
+    Holds show name, score, and user id which is utilized if the user wants to check their watched shows.
+    '''
+    
     db = Database()
 
     user_id = user.id
@@ -49,15 +54,10 @@ def addToList(animeAPIResponse, user):
         print(f"You didn't input a proper score value !")
         return
 
-    # Insert into SQL table
-    query = """
-        INSERT INTO software_architecture_anime_list (user_id, show_name, personal_score)
-        VALUES (%s, %s, %s)
-    """
-
-    values = (user_id, anime_title, personal_score)
-
-    db.cursor.execute(query, values)
+    db.cursor.execute(
+        "INSERT INTO software_architecture_anime_list (user_id, show_name, personal_score) VALUES (%s, %s, %s)",
+        (user_id, anime_title, personal_score)
+    )
     db.commit()
 
     print(f"{anime_title} added to your list!")
@@ -71,33 +71,40 @@ def addToList(animeAPIResponse, user):
     )
 
     user.watched_shows.append(new_show)
-    checkBadgesForUser(user, anime_title)
+
+    # Badges are related to shows within watched_shows. So to provide badges,
+    # We must check if they already have. If not, provide them with it.
+    checkBadgesForUser(user, anime_title, db)
 
     return
 
 def buildUser(row_user):
-    # row contains: (id, username, password_hash)
+    # From row_user, we get the id and associated username
     user_id = row_user[0]
     username = row_user[1]
 
+    # Build user object
     user = User(id=user_id, username=username)
 
-    # Load anime list
+    # User object variable watched_shows has complex functionality to fill it in. Utilize a secondary funciton for cleanliness
     user.watched_shows = loadAnimeList(user_id)
 
     return user
 
 def loadAnimeList(user_id):
-    db = Database()
+    '''
+    Queries the database table for all records associated with the users user_id and appends to a list which is
+    then added to the user's object variable.
+    '''
 
+    shows = []
+    db = Database()
     db.cursor.execute(
         "SELECT id, user_id, show_name, personal_score FROM software_architecture_anime_list WHERE user_id = %s",
         (user_id,)
     )
-
     rows = db.cursor.fetchall()
-    shows = []
-
+    
     for r in rows:
         shows.append(Show(
             id=r[0],

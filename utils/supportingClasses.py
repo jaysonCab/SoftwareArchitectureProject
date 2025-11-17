@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 class User:
     id: int
     username: str
-    watched_shows: list = field(default_factory=list)  # will fill later from DB
+    watched_shows: list = field(default_factory=list)  # will fill later from DB as requires more computation
 
 @dataclass
 class Show:

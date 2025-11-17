@@ -2,8 +2,12 @@ import bcrypt
 from utils.mainDatabase import Database, buildUser
 
 def loginSystem():
-    print(f'Would you like to login or create an account? (Login/Create): ')
-    loginChoice = input(str()).lower()
+    '''
+    Utilize a decision tree structure to determine what the user intends to do.
+    Can either create an account if doesn't exist or login to an already existing account.
+    '''
+    
+    loginChoice = input(str(f'Would you like to login or create an account? (Login/Create): ')).lower()
 
     if loginChoice == 'create':
         state = createAccount()
@@ -23,18 +27,16 @@ def createAccount():
     username = input("Enter a username: ")
     password = input("Enter a password: ")
 
-    # Hash password (bcrypt returns bytes)
+    # Implementation of hashed passwords saved in database rather than actual.
+    # bcrypt works with bytes, so converting to string literal with decode.
     hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-
-    # Convert bytes → UTF-8 string before storing
     hashed_str = hashed.decode()
 
-    query = """
-        INSERT INTO software_architecture_credentials (username, password_hash)
-        VALUES (%s, %s)
-    """
-
-    db.cursor.execute(query, (username, hashed_str))
+    # Insert account credentials into credentials table
+    db.cursor.execute(
+        "INSERT INTO software_architecture_credentials (username, password_hash) VALUES (%s, %s)",
+        (username, hashed_str)
+    )
     db.commit()
     print("Account created!")
 
