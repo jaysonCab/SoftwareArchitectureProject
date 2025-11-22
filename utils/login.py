@@ -34,7 +34,7 @@ def createAccount():
 
     # Insert account credentials into credentials table
     db.cursor.execute(
-        "INSERT INTO software_architecture_credentials (username, password_hash) VALUES (%s, %s)",
+        "insert into software_architecture_credentials (username, password_hash) VALUES (%s, %s)",
         (username, hashed_str)
     )
     db.commit()

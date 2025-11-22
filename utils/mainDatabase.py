@@ -18,10 +18,10 @@ class Database:
             cls._instance = super(Database, cls).__new__(cls)
 
             cls._instance.conn = mysql.connector.connect(
-                host=HOST,
-                user=USER,
-                password=PASSWORD,
-                database=DATABASE
+                host = HOST,
+                user = USER,
+                password = PASSWORD,
+                database = DATABASE
             )
             cls._instance.cursor = cls._instance.conn.cursor()
             print("Connected successfully!")

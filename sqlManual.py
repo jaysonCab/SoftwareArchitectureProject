@@ -67,22 +67,22 @@ try:
     # """)
     # conn.commit()
 
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS software_architecture_user_badges (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            user_id INT NOT NULL,
-            badge_number INT NOT NULL,
+    # cursor.execute("""
+    #     CREATE TABLE IF NOT EXISTS software_architecture_user_badges (
+    #         id INT AUTO_INCREMENT PRIMARY KEY,
+    #         user_id INT NOT NULL,
+    #         badge_number INT NOT NULL,
 
-            FOREIGN KEY (user_id)
-                REFERENCES software_architecture_credentials(id)
-                ON DELETE CASCADE,
+    #         FOREIGN KEY (user_id)
+    #             REFERENCES software_architecture_credentials(id)
+    #             ON DELETE CASCADE,
 
-            FOREIGN KEY (badge_number)
-                REFERENCES software_architecture_badges(badge_number)
-                ON DELETE CASCADE
-        )
-    """)
-    conn.commit()
+    #         FOREIGN KEY (badge_number)
+    #             REFERENCES software_architecture_badges(badge_number)
+    #             ON DELETE CASCADE
+    #     )
+    # """)
+    # conn.commit()
 
     # # Insert sample data
     # cursor.execute("INSERT INTO software_architecture_badges (badge_number, badge_name, badge_description) VALUES (%s, %s, %s)",(101, 'One Piece Fanatic', "You've added One Piece to your list!"))
@@ -99,16 +99,22 @@ try:
     # cursor.execute("DELETE FROM software_architecture_credentials")
     # conn.commit()
 
-    # # Retrieve data
-    # cursor.execute("SELECT * FROM software_architecture_profile_comments")
-    # rows = cursor.fetchall()
-    # for row in rows:
-    #     print(row)
-
-    cursor.execute("SELECT * FROM software_architecture_badges")
+    # Retrieve data
+    cursor.execute("SELECT * FROM software_architecture_credentials")
     rows = cursor.fetchall()
     for row in rows:
         print(row)
+
+    # cursor.execute("DESCRIBE software_architecture_profile_comments")
+    # schema = cursor.fetchall()
+
+    # for col in schema:
+    #     print(col)
+
+    # cursor.execute("SELECT * FROM software_architecture_badges")
+    # rows = cursor.fetchall()
+    # for row in rows:
+    #     print(row)
 
 except mysql.connector.Error as err:
     print(f"Error: {err}")
