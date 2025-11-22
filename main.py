@@ -8,6 +8,10 @@ source venv/Scripts/activate
 pip install -r requirements.txt
 
 Should be good to run.
+
+The Source code files I sent through zip file does not contain all the files. It doesn't contain the virtual
+environment I created locally, it also doesn't include credentials.py which holds connection secrets I do not
+wish to share.
 '''
 
 from utils.mainDatabase import Database
